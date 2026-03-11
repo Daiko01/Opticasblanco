@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO -->
+    <title>Ópticas Blanco — Su Salud Visual a un Precio Justo</title>
+    <meta
+      name="description"
+      content="Ópticas Blanco: gran variedad de armazones con stock garantizado en 3 sucursales en la V Región. Revisión oftalmológica sin esperas y asesoría directa por WhatsApp."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://opticasblanco.cl/" />
+
+    <!-- Open Graph (redes sociales) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://opticasblanco.cl/" />
+    <meta
+      property="og:title"
+      content="Ópticas Blanco — Su Salud Visual a un Precio Justo"
+    />
+    <meta
+      property="og:description"
+      content="Gran variedad de armazones con stock garantizado. Revisión oftalmológica sin esperas en la V Región."
+    />
+    <meta property="og:image" content="/og-image.jpg" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/isotipo.png" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/png" href="/isotipoblanco.png" media="(prefers-color-scheme: dark)" />
+    <link rel="shortcut icon" type="image/png" href="/isotipo.png" />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Fonts: Organic Tech Preset -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Preload LCP image -->
+    <link
+      rel="preload"
+      as="image"
+      href="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&q=80&w=1600"
+      fetchpriority="high"
+    />
+
+    <!-- Structured Data: LocalBusiness -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://opticasblanco.cl/#business",
+        "name": "Ópticas Blanco",
+        "description": "Óptica con 3 sucursales en la V Región. Gran variedad de armazones, revisión oftalmológica y asesoría personalizada.",
+        "url": "https://opticasblanco.cl",
+        "telephone": "+56-9-7587-9294",
+        "priceRange": "$$",
+        "image": "https://opticasblanco.cl/logo.png",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Viña del Mar",
+          "addressRegion": "Valparaíso",
+          "addressCountry": "CL"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "10:00",
+            "closes": "19:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday"],
+            "opens": "10:00",
+            "closes": "14:00"
+          }
+        ],
+        "sameAs": []
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Noise Overlay (feTurbulence at 0.05 opacity) -->
+    <div id="noise-overlay" aria-hidden="true" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;opacity:0.05;">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <filter id="noiseFilter">
+          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+      </svg>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
