@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Search, Glasses, LayoutGrid, Grid3X3, Grid2X2, Filter, X, CheckSquare, Square, ChevronLeft, ChevronRight } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
+import API_BASE_URL from '../config';
 
 const Checkbox = ({ label, checked, onChange }) => (
   <label className="flex items-center gap-3 py-1.5 cursor-pointer group">
@@ -36,8 +37,8 @@ export default function Catalogo() {
   useEffect(() => { setPaginaActual(1); }, [busqueda, categoriasSeleccionadas, marcasSeleccionadas, estilosSeleccionados, edadesSeleccionadas, generosSeleccionados, soloConStock, orden]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/productos').then(r => r.json()).then(d => { setProductos(d); setCargando(false); }).catch(() => setCargando(false));
-    fetch('http://localhost:5000/api/stock').then(r => r.json()).then(d => setStock(d)).catch(() => {});
+    fetch(`${API_BASE_URL}/productos`).then(r => r.json()).then(d => { setProductos(d); setCargando(false); }).catch(() => setCargando(false));
+    fetch(`${API_BASE_URL}/stock`).then(r => r.json()).then(d => setStock(d)).catch(() => {});
   }, []);
 
   const stockPorProducto = useMemo(() => { const m = {}; stock.forEach(s => { if (!m[s.producto_id]) m[s.producto_id] = 0; m[s.producto_id] += s.cantidad; }); return m; }, [stock]);

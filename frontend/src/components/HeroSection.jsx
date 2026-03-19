@@ -55,7 +55,7 @@ export default function HeroSection({ onAbrirReserva }) {
 
         {/* Keyline Statement */}
         <h1 className="hero-anim mb-6">
-          <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-white/90 tracking-tight leading-[1.1]">
+          <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-white tracking-tight leading-[1.1]">
             Tu salud visual es la
           </span>
           <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-drama italic text-white leading-[0.95] -mt-1 md:-mt-2">
@@ -64,7 +64,7 @@ export default function HeroSection({ onAbrirReserva }) {
         </h1>
 
         {/* Subtitle */}
-        <p className="hero-anim text-lg md:text-xl text-white/70 max-w-lg leading-relaxed mb-10 font-light">
+        <p className="hero-anim text-lg md:text-xl text-white/85 max-w-lg leading-relaxed mb-10 font-light">
           Su salud visual a un precio justo. Asesoría clínica personalizada y una selección exclusiva de armazones para ti.
         </p>
 
@@ -90,15 +90,15 @@ export default function HeroSection({ onAbrirReserva }) {
         <div className="hero-anim flex flex-wrap gap-8 mt-12 pt-8 border-t border-white/10">
           <div>
             <span className="block text-3xl md:text-4xl font-drama italic text-emerald-300">500+</span>
-            <span className="text-sm text-white/50 font-data uppercase tracking-wider">Modelos</span>
+            <span className="text-sm text-white/70 font-data uppercase tracking-wider">Modelos</span>
           </div>
           <div>
             <span className="block text-3xl md:text-4xl font-drama italic text-emerald-300">3</span>
-            <span className="text-sm text-white/50 font-data uppercase tracking-wider">Sucursales</span>
+            <span className="text-sm text-white/70 font-data uppercase tracking-wider">Sucursales</span>
           </div>
           <div>
             <span className="block text-3xl md:text-4xl font-drama italic text-emerald-300">15+</span>
-            <span className="text-sm text-white/50 font-data uppercase tracking-wider">Años</span>
+            <span className="text-sm text-white/70 font-data uppercase tracking-wider">Años</span>
           </div>
         </div>
       </div>

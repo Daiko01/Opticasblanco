@@ -15,7 +15,7 @@ export default function Contacto({ onAbrirReserva }) {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from('.contact-anim', {
+      gsap.from('.contact-anim-v2', {
         scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
         opacity: 0, y: 40, duration: 0.7, ease: 'power3.out', stagger: 0.1,
       });
@@ -39,9 +39,9 @@ export default function Contacto({ onAbrirReserva }) {
   };
 
   const sucursales = [
-    { nombre: 'Viña del Mar', direccion: 'Av. Valparaíso 518, Local 2, Galería Rapallo', telefono: '+56 9 9176 2935', whatsapp: '56991762935', horario: 'Lun-Vie: 10:00 - 19:00 · Sáb: 10:00 - 14:00', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Av.+Valparaíso+518,+Viña+del+Mar' },
-    { nombre: 'Quilpué', direccion: 'Calle Blanco 992-B', telefono: '+56 9 7440 8675', whatsapp: '56974408675', horario: 'Lun-Vie: 10:00 - 19:00 · Sáb: 10:00 - 14:00', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Blanco+Encalada+992,+Quilpué' },
-    { nombre: 'La Calera', direccion: 'Calle Carrera 988, esq. Huici', telefono: '+56 9 6706 8446', whatsapp: '56967068446', horario: 'Lun-Vie: 10:00 - 19:00 · Sáb: 10:00 - 14:00', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Carrera+988,+La+Calera' },
+    { nombre: 'Viña del Mar', direccion: 'Av. Valparaíso 518, Local 2, Galería Rapallo', fijo: '32-2691515', whatsapp: '56991762935', whatsappDisplay: '+56 9 9176 2935', horario: 'Lun-Vie: 10:00 - 19:00 · Sáb: 10:00 - 14:00', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Av.+Valparaíso+518,+Viña+del+Mar' },
+    { nombre: 'Quilpué', direccion: 'Calle Blanco 992-B', fijo: '32-3538907', whatsapp: '56974408675', whatsappDisplay: '+56 9 7440 8675', horario: 'Lun-Vie: 10:00 - 19:00 · Sáb: 10:00 - 14:00', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Blanco+Encalada+992,+Quilpué' },
+    { nombre: 'La Calera', direccion: 'Calle Carrera 988, esq. Huici', fijo: '32-33830734', whatsapp: '56967068446', whatsappDisplay: '+56 9 6706 8446', horario: 'Lun-Vie: 10:00 - 19:00 · Sáb: 10:00 - 14:00', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Carrera+988,+La+Calera' },
   ];
 
   return (
@@ -54,7 +54,7 @@ export default function Contacto({ onAbrirReserva }) {
         <h1 className="text-4xl md:text-6xl font-heading font-extrabold text-emerald-950 mb-6 tracking-tight">
           Estamos aquí para <span className="font-drama italic text-emerald-700">ayudarte</span>
         </h1>
-        <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto font-light leading-relaxed">
+        <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto font-light leading-relaxed">
           Escríbenos, llámanos o visítanos en cualquiera de nuestras sucursales. Tu salud visual es nuestra prioridad.
         </p>
       </ScrollReveal>
@@ -64,35 +64,35 @@ export default function Contacto({ onAbrirReserva }) {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <button
             onClick={onAbrirReserva}
-            className="contact-anim organic-card p-6 text-center group hover:!border-emerald-300 transition-all"
+            className="contact-anim-v2 organic-card-v2 p-6 md:p-8 text-center group hover:!border-emerald-300 transition-all flex flex-col items-center justify-center h-full"
           >
-            <div className="w-14 h-14 mx-auto bg-emerald-600 text-white rounded-4xl flex items-center justify-center mb-4 shadow-organic-sm group-hover:scale-105 transition-transform">
+            <div className="w-14 h-14 bg-emerald-600 text-white rounded-4xl flex items-center justify-center mb-6 shadow-organic-sm group-hover:scale-105 transition-transform">
               <Clock size={24} />
             </div>
-            <h3 className="font-heading font-bold text-emerald-950 mb-1">Reservar Hora</h3>
-            <p className="text-sm text-slate-400">Agenda tu examen visual</p>
+            <h3 className="font-heading font-bold text-emerald-950 mb-2">Reservar Hora</h3>
+            <p className="text-sm text-slate-900 font-medium">Agenda tu examen visual</p>
           </button>
 
           <button
-            onClick={() => handleWhatsApp('56975879294', 'general')}
-            className="contact-anim organic-card p-6 text-center group hover:!border-emerald-300 transition-all"
+            onClick={() => handleWhatsApp('56991762935', 'Viña del Mar')}
+            className="contact-anim-v2 organic-card-v2 p-6 md:p-8 text-center group hover:!border-emerald-300 transition-all flex flex-col items-center justify-center h-full"
           >
-            <div className="w-14 h-14 mx-auto bg-[#25D366] text-white rounded-4xl flex items-center justify-center mb-4 shadow-organic-sm group-hover:scale-105 transition-transform">
+            <div className="w-14 h-14 bg-emerald-600 text-white rounded-4xl flex items-center justify-center mb-6 shadow-organic-sm group-hover:scale-105 transition-transform">
               <MessageCircle size={24} />
             </div>
-            <h3 className="font-heading font-bold text-emerald-950 mb-1">WhatsApp</h3>
-            <p className="text-sm text-slate-400">Respuesta inmediata</p>
+            <h3 className="font-heading font-bold text-emerald-950 mb-2">WhatsApp</h3>
+            <p className="text-sm text-slate-900 font-medium">Respuesta inmediata</p>
           </button>
 
           <a
             href="mailto:contacto@opticasblanco.cl"
-            className="contact-anim organic-card p-6 text-center group hover:!border-emerald-300 transition-all block"
+            className="contact-anim-v2 organic-card-v2 p-6 md:p-8 text-center group hover:!border-emerald-300 transition-all block flex flex-col items-center justify-center h-full"
           >
-            <div className="w-14 h-14 mx-auto bg-emerald-600 text-white rounded-4xl flex items-center justify-center mb-4 shadow-organic-sm group-hover:scale-105 transition-transform">
+            <div className="w-14 h-14 bg-emerald-600 text-white rounded-4xl flex items-center justify-center mb-6 shadow-organic-sm group-hover:scale-105 transition-transform">
               <Mail size={24} />
             </div>
-            <h3 className="font-heading font-bold text-emerald-950 mb-1">Email</h3>
-            <p className="text-sm text-slate-500 font-medium">contacto@opticasblanco.cl</p>
+            <h3 className="font-heading font-bold text-emerald-950 mb-2">Email</h3>
+            <p className="text-sm text-emerald-950 font-bold">contacto@opticasblanco.cl</p>
           </a>
         </div>
       </div>
@@ -101,10 +101,10 @@ export default function Contacto({ onAbrirReserva }) {
       <div className="max-w-6xl mx-auto px-6 mb-20">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Contact Form */}
-          <div className="lg:col-span-3 contact-anim">
-            <div className="organic-card p-8 md:p-10">
+            <div className="lg:col-span-3 contact-anim-v2">
+              <div className="organic-card-v2 p-8 md:p-10">
               <h2 className="text-2xl font-heading font-bold text-emerald-950 mb-2">Envíanos un mensaje</h2>
-              <p className="text-slate-400 mb-8 text-sm">Completa el formulario y te responderemos a la brevedad.</p>
+              <p className="text-slate-800 font-medium mb-8 text-sm">Completa el formulario y te responderemos a la brevedad.</p>
 
               {enviado ? (
                 <div className="text-center py-12 animate-fade-in">
@@ -126,7 +126,7 @@ export default function Contacto({ onAbrirReserva }) {
                         type="text" required value={formData.nombre}
                         onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
                         placeholder="Tu nombre"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-300 outline-none transition-all font-medium text-sm"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-4xl px-4 py-3 text-slate-800 focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-300 outline-none transition-all font-medium text-sm"
                       />
                     </div>
                     <div>
@@ -135,7 +135,7 @@ export default function Contacto({ onAbrirReserva }) {
                         type="email" required value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="tu@correo.cl"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-300 outline-none transition-all font-medium text-sm"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-4xl px-4 py-3 text-slate-800 focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-300 outline-none transition-all font-medium text-sm"
                       />
                     </div>
                   </div>
@@ -147,7 +147,7 @@ export default function Contacto({ onAbrirReserva }) {
                         type="tel" value={formData.telefono}
                         onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
                         placeholder="+56 9 1234 5678"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-300 outline-none transition-all font-medium text-sm"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-4xl px-4 py-3 text-slate-800 focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-300 outline-none transition-all font-medium text-sm"
                       />
                     </div>
                     <div>
@@ -155,7 +155,7 @@ export default function Contacto({ onAbrirReserva }) {
                       <select
                         value={formData.sucursal}
                         onChange={(e) => setFormData({ ...formData, sucursal: e.target.value })}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-300 outline-none transition-all font-medium text-sm appearance-none"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-4xl px-4 py-3 text-slate-800 focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-300 outline-none transition-all font-medium text-sm appearance-none"
                         style={{ backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.75rem center', backgroundSize: '1.2em' }}
                       >
                         <option value="">Selecciona una sucursal</option>
@@ -172,7 +172,7 @@ export default function Contacto({ onAbrirReserva }) {
                       required value={formData.mensaje} rows={4}
                       onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
                       placeholder="Cuéntanos en qué podemos ayudarte..."
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-300 outline-none transition-all font-medium text-sm resize-none"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-4xl px-4 py-3 text-slate-800 focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-300 outline-none transition-all font-medium text-sm resize-none"
                     />
                   </div>
 
@@ -195,9 +195,9 @@ export default function Contacto({ onAbrirReserva }) {
           </div>
 
           {/* Info Sidebar */}
-          <div className="lg:col-span-2 space-y-6 contact-anim">
-            {/* Map embed */}
-            <div className="organic-card overflow-hidden">
+            <div className="lg:col-span-2 space-y-6 contact-anim-v2">
+              {/* Map embed */}
+              <div className="organic-card-v2 overflow-hidden">
               <iframe
                 title="Ubicación Ópticas Blanco - Viña del Mar"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3345.8760978849835!2d-71.62424548481775!3d-33.040934080893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689de6f7f8b1e1f%3A0x2a96b23e516c4f5!2sAv.%20Valpara%C3%ADso%20518%2C%20Vi%C3%B1a%20del%20Mar!5e0!3m2!1ses!2scl!4v1700000000000!5m2!1ses!2scl"
@@ -207,29 +207,29 @@ export default function Contacto({ onAbrirReserva }) {
               />
               <div className="p-5">
                 <h3 className="font-heading font-bold text-emerald-950 mb-1">Sucursal Principal</h3>
-                <p className="text-sm text-slate-400">Av. Valparaíso 518, Viña del Mar</p>
+                <p className="text-sm text-slate-900 font-medium">Av. Valparaíso 518, Viña del Mar</p>
               </div>
             </div>
 
             {/* Horarios */}
-            <div className="organic-card p-6">
+            <div className="organic-card-v2 p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-emerald-100 rounded-2xl flex items-center justify-center border border-emerald-200">
+                <div className="w-10 h-10 bg-emerald-100 rounded-4xl flex items-center justify-center border border-emerald-200">
                   <Clock size={18} className="text-emerald-700" />
                 </div>
                 <h3 className="font-heading font-bold text-emerald-950">Horarios de Atención</h3>
               </div>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between py-2 border-b border-slate-50">
-                  <span className="text-slate-500">Lunes a Viernes</span>
+                  <span className="text-slate-700 font-medium">Lunes a Viernes</span>
                   <span className="font-bold text-emerald-950 font-data">10:00 - 19:00</span>
                 </div>
                 <div className="flex justify-between py-2 border-b border-slate-50">
-                  <span className="text-slate-500">Sábado</span>
+                  <span className="text-slate-700 font-medium">Sábado</span>
                   <span className="font-bold text-emerald-950 font-data">10:00 - 14:00</span>
                 </div>
                 <div className="flex justify-between py-2">
-                  <span className="text-slate-500">Domingo</span>
+                  <span className="text-slate-700 font-medium">Domingo</span>
                   <span className="font-bold text-slate-300 font-data">Cerrado</span>
                 </div>
               </div>
@@ -245,15 +245,15 @@ export default function Contacto({ onAbrirReserva }) {
             <h2 className="text-3xl font-heading font-bold text-emerald-950">
               Nuestras <span className="font-drama italic text-emerald-700">Sucursales</span>
             </h2>
-            <p className="text-slate-500 mt-3 font-light">Elige la más cercana para comunicarte directamente.</p>
+            <p className="text-slate-900 mt-3 font-medium">Elige la más cercana para comunicarte directamente.</p>
           </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {sucursales.map((suc, idx) => (
               <ScrollReveal key={idx}>
-                <div className="organic-card p-6 h-full flex flex-col">
+                <div className="organic-card-v2 p-6 h-full flex flex-col">
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="bg-emerald-600 text-white p-2.5 rounded-2xl shadow-organic-sm shrink-0">
+                    <div className="bg-emerald-600 text-white p-2.5 rounded-4xl shadow-organic-sm shrink-0">
                       <MapPin size={20} />
                     </div>
                     <div>
@@ -264,29 +264,35 @@ export default function Contacto({ onAbrirReserva }) {
 
                   <div className="space-y-3 mb-6 flex-1">
                     <div className="flex items-start gap-2.5">
-                      <MapPin size={14} className="text-slate-300 mt-0.5 shrink-0" />
-                      <span className="text-sm text-slate-600">{suc.direccion}</span>
+                      <MapPin size={14} className="text-slate-500 mt-0.5 shrink-0" />
+                      <span className="text-sm text-slate-800">{suc.direccion}</span>
                     </div>
                     <div className="flex items-start gap-2.5">
-                      <Phone size={14} className="text-slate-300 mt-0.5 shrink-0" />
-                      <span className="text-sm text-slate-600">{suc.telefono}</span>
+                      <MessageCircle size={14} className="text-slate-500 mt-0.5 shrink-0" />
+                      <span className="text-sm text-slate-800">{suc.whatsappDisplay}</span>
                     </div>
+                    {suc.fijo && (
+                      <div className="flex items-start gap-2.5">
+                        <Phone size={14} className="text-slate-500 mt-0.5 shrink-0" />
+                        <span className="text-sm text-slate-800">{suc.fijo}</span>
+                      </div>
+                    )}
                     <div className="flex items-start gap-2.5">
-                      <Clock size={14} className="text-slate-300 mt-0.5 shrink-0" />
-                      <span className="text-sm text-slate-600">{suc.horario}</span>
+                      <Clock size={14} className="text-slate-500 mt-0.5 shrink-0" />
+                      <span className="text-sm text-slate-800">{suc.horario}</span>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 mt-auto">
                     <button
                       onClick={() => handleWhatsApp(suc.whatsapp, suc.nombre)}
-                      className="btn-magnetic flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-2.5 rounded-2xl text-sm transition-all"
+                      className="btn-magnetic flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-2.5 rounded-4xl text-sm transition-all"
                     >
                       <MessageCircle size={14} /> WhatsApp
                     </button>
                     <a
                       href={suc.mapUrl} target="_blank" rel="noopener noreferrer"
-                      className="btn-magnetic flex items-center justify-center gap-2 bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-bold py-2.5 rounded-2xl text-sm border border-slate-200 hover:border-emerald-300 transition-all"
+                      className="btn-magnetic flex items-center justify-center gap-2 bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-bold py-2.5 rounded-4xl text-sm border border-slate-200 hover:border-emerald-300 transition-all"
                     >
                       <MapPin size={14} /> Ver Mapa
                     </a>

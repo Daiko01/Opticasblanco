@@ -1,17 +1,46 @@
-// backend/controllers/citasController.js
 const db = require('../config/db');
 const { enviarCorreoConfirmacion, enviarAlertaAdmin } = require('../config/mailer');
-const { enviarMensaje, cerrarSesion } = require('../services/whatsappService');
 const { crearEventoCalendario } = require('../services/calendarService');
+
+// Helper para sanitizar strings (evitar XSS básico)
+const sanitizar = (str) => {
+    if (typeof str !== 'string') return str;
+    return str.replace(/[<>]/g, '').trim(); 
+};
+
 
 // Función 1: Guardar una cita nueva y enviar el correo
 const crearCita = async (req, res) => {
     try {
-        const { sucursal_id, cliente_nombre, rut, telefono, email, fecha_hora, motivo } = req.body;
+        let { sucursal_id, cliente_nombre, rut, telefono, email, fecha_hora, motivo } = req.body;
         
-        if (!sucursal_id || !cliente_nombre || !rut || !fecha_hora) {
-            return res.status(400).json({ mensaje: 'Faltan datos obligatorios' });
+        // 1. Validación de presencia
+        if (!sucursal_id || !cliente_nombre || !rut || !fecha_hora || !email || !telefono) {
+            return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' });
         }
+
+        // 2. Sanitización básica
+        cliente_nombre = sanitizar(cliente_nombre);
+        rut = sanitizar(rut);
+        telefono = sanitizar(telefono);
+        email = sanitizar(email).toLowerCase();
+        motivo = sanitizar(motivo);
+
+        // 3. Validaciones de formato
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ mensaje: 'Formato de email inválido' });
+        }
+
+        const telRegex = /^[0-9+ \-()]{7,20}$/;
+        if (!telRegex.test(telefono)) {
+            return res.status(400).json({ mensaje: 'Formato de teléfono inválido' });
+        }
+
+        if (isNaN(Date.parse(fecha_hora))) {
+            return res.status(400).json({ mensaje: 'Formato de fecha u hora inválido' });
+        }
+
 
         // Motivos permitidos según reglas de negocio del cliente
         const motivosPermitidos = ['Revisión oftalmológica', 'Despacho de receta médica'];
@@ -52,34 +81,6 @@ const crearCita = async (req, res) => {
             fechaFormateada = `${day}/${month}/${year} a las ${horaPart} hrs`;
         }
 
-        // Preparar notificación por WhatsApp
-        // Asumiendo que el admin tiene un número configurado en .env
-        const adminPhone = process.env.ADMIN_PHONE || '56975879294';
-        const msgAdmin = `*Nueva cita agendada*\nCliente: ${cliente_nombre}\n📞 Celular: ${telefono}\nMotivo: ${motivoReal}\nFecha: ${fechaFormateada}\nSucursal: ${nombreSucursal}`;
-
-        // Mapeo de ubicaciones para generar enlaces de mapas
-        const locationMap = {
-            1: { // Viña del Mar
-                direccion: "Av. Valparaíso 518 local 2 galería rapallo, Viña del Mar",
-                mapQuery: "Av.+Valparaíso+518,+Viña+del+Mar,+Valparaíso,+Chile"
-            },
-            2: { // Quilpué
-                direccion: "Calle Blanco 992-B, Quilpué",
-                mapQuery: "Blanco+Encalada+992,+Quilpué,+Valparaíso,+Chile"
-            },
-            3: { // La Calera
-                direccion: "Calle carrera 988 esq. Huici, La Calera",
-                mapQuery: "Carrera+988,+La+Calera,+Valparaíso,+Chile"
-            }
-        };
-
-        const loc = locationMap[sucursal_id] || locationMap[1];
-        const gmapsLink = `https://www.google.com/maps/search/?api=1&query=${loc.mapQuery}`;
-        const wazeLink = `https://waze.com/ul?q=${loc.mapQuery}`;
-
-        // Preparar notificación por WhatsApp para el Cliente
-        const msgCliente = `¡Hola ${cliente_nombre.split(' ')[0]}! 🌟\n\nTu reserva en *Ópticas Blanco* ha sido ingresada correctamente y el equipo ya está notificado.\n\n🏥 *Sucursal:* ${nombreSucursal}\n📍 *Dirección:* ${loc.direccion}\n📅 *Fecha y Hora:* ${fechaFormateada}\n👁️ *Motivo:* ${motivoReal}\n\n🗺️ *¿Cómo llegar?*\n• Google Maps:\n${gmapsLink}\n\n• Waze:\n${wazeLink}\n\n¡Nos vemos pronto!`;
-
         const citaDatoCompleto = { ...req.body, motivo: motivoReal };
 
         // Mapeo Dinámico de Calendarios por Sucursal
@@ -111,8 +112,6 @@ const crearCita = async (req, res) => {
         Promise.allSettled([
             enviarCorreoConfirmacion(email, cliente_nombre, fecha_hora, sucursal_id, motivoReal),
             enviarAlertaAdmin(req.body),
-            enviarMensaje(sucursal_id, adminPhone, msgAdmin),
-            enviarMensaje(sucursal_id, telefono, msgCliente), // Nuevo mensaje al cliente
             llamarCalendarioSeguro()
         ]).then(results => {
             results.forEach((result, idx) => {
@@ -193,28 +192,11 @@ const obtenerHorasOcupadas = async (req, res) => {
     }
 };
 
-// Función 5: Endpoint administrativo para forzar el deslogueo del WhatsApp de una sucursal
-const logoutWhatsApp = async (req, res) => {
-    try {
-        const { sucursal_id } = req.params;
-        
-        if (!sucursal_id) {
-            return res.status(400).json({ mensaje: 'Se requiere enviar el id de la sucursal' });
-        }
-
-        const resultado = await cerrarSesion(sucursal_id);
-        res.status(200).json(resultado);
-    } catch (error) {
-        console.error("Error en logoutWhatsApp:", error);
-        res.status(500).json({ mensaje: 'Error al intentar cerrar la sesión de WhatsApp', detalle: error.message });
-    }
-};
 
 // Exportamos TODAS las funciones
 module.exports = {
     crearCita,
     obtenerCitas,
     actualizarEstadoCita,
-    obtenerHorasOcupadas,
-    logoutWhatsApp
+    obtenerHorasOcupadas
 };

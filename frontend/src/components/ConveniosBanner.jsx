@@ -4,7 +4,7 @@ export default function ConveniosBanner() {
   const convenios = ['Isapre Banmédica', 'Consalud', 'Caja Los Andes', 'Fonasa (Bono PAD)', 'Cruz Blanca'];
 
   const handleWhatsAppConvenio = () => {
-    window.open('https://wa.me/56975879294?text=Hola,%20me%20gustaría%20saber%20mas%20sobre%20los%20convenios%20y%20descuentos.', '_blank', 'noopener,noreferrer');
+    window.open('https://wa.me/56991762935?text=Hola,%20me%20gustaría%20saber%20mas%20sobre%20los%20convenios%20y%20descuentos.', '_blank', 'noopener,noreferrer');
   };
 
   return (

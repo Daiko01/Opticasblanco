@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, Star, Glasses } from 'lucide-react';
 import ProductCard from './ProductCard';
+import API_BASE_URL from '../config';
 
 export default function MejoresProductos() {
   const [productos, setProductos] = useState([]);
@@ -8,7 +9,7 @@ export default function MejoresProductos() {
   const [filtroActivo, setFiltroActivo] = useState('Op'); // 'Op': Opticos, 'Sol': Sol, 'Todos': Todos
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/productos')
+    fetch(`${API_BASE_URL}/productos`)
       .then(r => r.json())
       .then(data => {
         setProductos(data);

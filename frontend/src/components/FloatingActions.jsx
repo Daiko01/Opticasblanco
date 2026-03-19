@@ -27,7 +27,7 @@ export default function FloatingActions({ onAbrirReserva }) {
             Reservar Hora<span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-emerald-950 rotate-45"></span>
           </span>
         </button>
-        <button onClick={() => window.open('https://wa.me/56975879294?text=Hola', '_blank')}
+        <button onClick={() => window.open('https://wa.me/56991762935?text=Hola', '_blank')}
           className="group relative btn-magnetic flex items-center justify-center p-4 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-4xl shadow-organic-lg transition-all"
           aria-label="Consultar por WhatsApp">
           <MessageCircle size={22} />

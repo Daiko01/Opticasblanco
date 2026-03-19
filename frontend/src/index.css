@@ -20,6 +20,20 @@ body {
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   background-color: #ffffff;
   color: #334155; /* slate-700 */
+  position: relative;
+}
+
+/* ---- Cinematic Noise Overlay ---- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.01; /* Minimal noise to avoid interference with text clarity */
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 /* ---- Accessibility: Skip Link ---- */
@@ -98,20 +112,20 @@ body {
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .link-lift:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px); /* more visible lift */
 }
 
 /* ========================================
    ORGANIC CONTAINERS (white/slate-50 palette)
    ======================================== */
-.organic-card {
-  border-radius: 2rem;
+.organic-card-v2 {
+  border-radius: 2.5rem;
   background: #ffffff;
-  border: 1px solid #e2e8f0; /* slate-200 */
-  box-shadow: 0 2px 8px -2px rgba(0,0,0,0.06);
+  border: 1.5px solid #94a3b8; /* slate-400: much clearer than before */
+  box-shadow: 0 4px 12px -2px rgba(0,0,0,0.1);
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.organic-card:hover {
+.organic-card-v2:hover {
   box-shadow: 0 16px 48px -8px rgba(0,0,0,0.12);
   transform: translateY(-4px);
 }
@@ -125,6 +139,16 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 8px 24px -4px rgba(0,0,0,0.08);
 }
+
+/* Custom Utilities */
+.rounded-4xl {
+  border-radius: 2.5rem;
+}
+
+.shadow-organic-sm { box-shadow: 0 2px 8px -2px rgba(0,0,0,0.06); }
+.shadow-organic-md { box-shadow: 0 8px 32px -4px rgba(0,0,0,0.08); }
+.shadow-organic-lg { box-shadow: 0 20px 64px -8px rgba(0,0,0,0.12); }
+.shadow-organic-xl { box-shadow: 0 32px 96px -12px rgba(0,0,0,0.16); }
 
 /* ========================================
    TYPOGRAPHY UTILITIES

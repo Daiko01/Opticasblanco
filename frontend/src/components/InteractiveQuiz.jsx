@@ -16,7 +16,7 @@ export default function InteractiveQuiz() {
   };
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/56975879294?text=Hola,%20vengo%20de%20la%20pagina%20y%20tengo%20esta%20consulta', '_blank');
+    window.open('https://wa.me/56991762935?text=Hola,%20vengo%20de%20la%20pagina%20y%20tengo%20esta%20consulta', '_blank');
   };
 
   return (

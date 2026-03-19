@@ -24,6 +24,7 @@ import NuestrasTiendas from './components/NuestrasTiendas';
 import Contacto from './components/Contacto';
 import NuestrasMarcas from './components/NuestrasMarcas';
 import Breadcrumbs from './components/Breadcrumbs';
+import API_BASE_URL from './config';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -136,7 +137,7 @@ function HeaderPublico({ modoOscuro, setModoOscuro, onAbrirReserva }) {
 
   useEffect(() => {
     if (busquedaAbierta && productosBusqueda.length === 0) {
-      fetch('http://localhost:5000/api/productos')
+      fetch(`${API_BASE_URL}/productos`)
         .then(r => r.json())
         .then(d => setProductosBusqueda(d))
         .catch(e => console.error(e));
@@ -157,8 +158,8 @@ function HeaderPublico({ modoOscuro, setModoOscuro, onAbrirReserva }) {
     : 'bg-white/70 backdrop-blur-xl border-slate-200/60 shadow-organic-sm';
 
   const textClasses = navTransparent
-    ? 'text-white/80 hover:text-white'
-    : 'text-slate-600 hover:text-emerald-700';
+    ? 'text-white hover:text-emerald-300'
+    : 'text-slate-800 hover:text-emerald-700';
 
   return (
     <header className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-6xl rounded-4xl border transition-all duration-500 ${navClasses}`} role="banner">
@@ -190,14 +191,14 @@ function HeaderPublico({ modoOscuro, setModoOscuro, onAbrirReserva }) {
             <div className="relative flex items-center" ref={searchRef}>
               <button
                 onClick={() => { setBusquedaAbierta(!busquedaAbierta); setBusquedaGlobal(''); }}
-                className={`p-2 transition-colors rounded-xl ${navTransparent ? 'text-white/70 hover:text-white' : 'text-slate-400 hover:text-emerald-700'}`}
+                className={`p-2 transition-colors rounded-3xl ${navTransparent ? 'text-white hover:text-emerald-300' : 'text-slate-600 hover:text-emerald-700'}`}
                 aria-label="Abrir buscador"
               >
                 <Search size={18} />
               </button>
               {busquedaAbierta && (
                 <div className="absolute right-0 top-full mt-3 w-80 bg-white shadow-organic-xl rounded-4xl border border-slate-200 p-3 animate-fade-in origin-top-right" role="search">
-                  <div className="flex items-center bg-slate-50 rounded-2xl px-3 py-2.5 border border-slate-200 focus-within:ring-2 focus-within:ring-emerald-500/30 transition-shadow">
+                  <div className="flex items-center bg-slate-50 rounded-3xl px-3 py-2.5 border border-slate-200 focus-within:ring-2 focus-within:ring-emerald-500/30 transition-shadow">
                     <Search size={16} className="text-slate-300 mr-2 shrink-0" />
                     <input
                       type="text"
@@ -213,14 +214,14 @@ function HeaderPublico({ modoOscuro, setModoOscuro, onAbrirReserva }) {
                   </div>
                   <div className="mt-2 max-h-72 overflow-y-auto custom-scrollbar">
                     {busquedaGlobal.trim().length === 0 ? (
-                      <div className="px-3 py-4 text-center"><p className="text-xs text-slate-400 font-data">Escribe para ver resultados…</p></div>
+                      <div className="px-3 py-4 text-center"><p className="text-xs text-slate-500 font-data">Escribe para ver resultados…</p></div>
                     ) : resultadosRapidos.length > 0 ? (
                       <div className="flex flex-col gap-1">
                         {resultadosRapidos.map(prod => (
                           <Link key={prod.id} to={`/producto/${prod.id}`} onClick={() => setBusquedaAbierta(false)}
-                            className="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-2xl transition-colors group"
+                            className="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-3xl transition-colors group"
                           >
-                            <div className="w-10 h-10 rounded-xl bg-slate-50 overflow-hidden shrink-0 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-3xl bg-slate-50 overflow-hidden shrink-0 flex items-center justify-center">
                               {prod.imagen_url ? (
                                 <img src={prod.imagen_url} alt={prod.nombre} className="w-full h-full object-cover" />
                               ) : (
@@ -236,7 +237,7 @@ function HeaderPublico({ modoOscuro, setModoOscuro, onAbrirReserva }) {
                         ))}
                       </div>
                     ) : (
-                      <div className="px-3 py-4 text-center"><p className="text-xs text-slate-400">No encontramos "{busquedaGlobal}"</p></div>
+                      <div className="px-3 py-4 text-center"><p className="text-xs text-slate-500">No encontramos "{busquedaGlobal}"</p></div>
                     )}
                   </div>
                 </div>
@@ -254,7 +255,7 @@ function HeaderPublico({ modoOscuro, setModoOscuro, onAbrirReserva }) {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMenuMobileAbierto(!menuMobileAbierto)}
-              className={`p-2 rounded-xl transition-colors lg:hidden ${navTransparent ? 'text-white/60 hover:text-white' : 'text-slate-400 hover:text-emerald-700'}`}
+              className={`p-2 rounded-3xl transition-colors lg:hidden ${navTransparent ? 'text-white hover:text-emerald-300' : 'text-slate-600 hover:text-emerald-700'}`}
               aria-label={menuMobileAbierto ? 'Cerrar menú' : 'Abrir menú'}
             >
               {menuMobileAbierto ? <X size={18} /> : <Menu size={18} />}

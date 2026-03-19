@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import API_BASE_URL from '../config';
 
 // Skeleton card para mostrar mientras carga
 function SkeletonCard() {
@@ -29,7 +30,7 @@ export default function ProductosDestacados() {
   };
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/productos')
+    fetch(`${API_BASE_URL}/productos`)
       .then(r => r.json())
       .then(datos => {
         setProductos(datos.slice(0, 4));

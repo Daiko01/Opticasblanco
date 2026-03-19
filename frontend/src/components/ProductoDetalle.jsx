@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useParams, Link } from 'react-router-dom';
 import { MapPin, Package, ArrowLeft, Glasses, Search, CalendarDays, AlertTriangle, MessageCircle, Ruler, X, Users, CheckCircle2, Map, ChevronLeft, ChevronRight } from 'lucide-react';
+import API_BASE_URL from '../config';
 
 export default function ProductoDetalle({ onAbrirReserva }) {
   const { id } = useParams();
@@ -100,14 +101,14 @@ export default function ProductoDetalle({ onAbrirReserva }) {
       setViewers(Math.floor(Math.random() * 12) + 3);
     }, 0);
 
-    fetch(`http://localhost:5000/api/productos/${id}`)
+    fetch(`${API_BASE_URL}/productos/${id}`)
       .then(r => r.json())
       .then(data => { 
         setProducto(data); 
         setImagenSeleccionada(data.imagen_url);
         
         // Cargar todos los productos para filtrar relacionados
-        fetch('http://localhost:5000/api/productos')
+        fetch(`${API_BASE_URL}/productos`)
           .then(r => r.json())
           .then(allProductos => {
             if (data && !data.mensaje) {
@@ -124,7 +125,7 @@ export default function ProductoDetalle({ onAbrirReserva }) {
       .catch(() => setCargando(false));
 
     // Cargar sucursales globlamente para el modal de WhatsApp
-    fetch('http://localhost:5000/api/sucursales')
+    fetch(`${API_BASE_URL}/sucursales`)
       .then(r => r.json())
       .then(data => setSucursales(data))
       .catch(e => console.error("Error cargando sucursales para WhatsApp:", e));

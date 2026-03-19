@@ -2,7 +2,7 @@ import { ShieldCheck, ArrowRight } from 'lucide-react';
 
 export default function NuevasColeccionesBanner() {
   const handleConsultar = () => {
-    window.open('https://wa.me/56975879294?text=Hola,%20vengo%20de%20la%20pagina%20y%20me%20interesa%20conocer%20las%20nuevas%20colecciones%20con%20filtro%20de%20luz%20azul.', '_blank', 'noopener,noreferrer');
+    window.open('https://wa.me/56991762935?text=Hola,%20vengo%20de%20la%20pagina%20y%20me%20interesa%20conocer%20las%20nuevas%20colecciones%20con%20filtro%20de%20luz%20azul.', '_blank', 'noopener,noreferrer');
   };
 
   return (

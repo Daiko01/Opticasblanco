@@ -6,6 +6,7 @@ import {
   Image as ImageIcon, Star, Sparkles, Flame, Loader2
 } from 'lucide-react';
 import DataTable from 'react-data-table-component';
+import API_BASE_URL from '../config';
 
 export default function AdminPanel() {
   const [pestanaActiva, setPestanaActiva] = useState('dashboard');
@@ -73,8 +74,8 @@ function VistaGeneral({ setPestanaActiva }) {
 
   useEffect(() => {
     Promise.all([
-      fetch('http://localhost:5000/api/citas').then(r => r.json()),
-      fetch('http://localhost:5000/api/productos').then(r => r.json())
+      fetch(`${API_BASE_URL}/citas`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/productos`).then(r => r.json())
     ]).then(([citas, prod]) => {
       const hoy = new Date().toISOString().split('T')[0];
       const citasHoy = citas.filter(c => c.fecha_hora.startsWith(hoy)).length;
@@ -157,7 +158,7 @@ function PanelCitas() {
   const [filtro, setFiltro] = useState('');
 
   const cargarCitas = () => {
-    fetch('http://localhost:5000/api/citas')
+    fetch(`${API_BASE_URL}/citas`)
       .then(r => r.json())
       .then(d => setCitas(d))
       .catch(e => console.error("Error:", e));
@@ -167,7 +168,7 @@ function PanelCitas() {
 
   const cambiarEstado = async (id, nuevoEstado) => {
     try {
-      const r = await fetch(`http://localhost:5000/api/citas/${id}`, {
+      const r = await fetch(`${API_BASE_URL}/citas/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ estado: nuevoEstado })
@@ -297,7 +298,7 @@ function PanelProductos() {
   });
 
   const cargarProductos = () => {
-    fetch('http://localhost:5000/api/productos')
+    fetch(`${API_BASE_URL}/productos`)
       .then(r => r.json())
       .then(d => setProductos(d.sort((a,b) => b.id - a.id)))
       .catch(e => console.error("Error:", e));
@@ -380,8 +381,8 @@ function PanelProductos() {
     });
 
     const url = editandoId
-      ? `http://localhost:5000/api/productos/${editandoId}`
-      : 'http://localhost:5000/api/productos';
+      ? `${API_BASE_URL}/productos/${editandoId}`
+      : `${API_BASE_URL}/productos`;
     const method = editandoId ? 'PUT' : 'POST';
 
     try {
@@ -429,7 +430,7 @@ function PanelProductos() {
     if (!result.isConfirmed) return;
     
     try {
-      const r = await fetch(`http://localhost:5000/api/productos/${id}`, { method: 'DELETE' });
+      const r = await fetch(`${API_BASE_URL}/productos/${id}`, { method: 'DELETE' });
       if (r.ok) {
         cargarProductos();
         Swal.fire({ icon: 'success', title: 'Eliminado', showConfirmButton: false, timer: 1000 });

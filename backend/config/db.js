@@ -1,6 +1,5 @@
-// backend/config/db.js
 const mysql = require('mysql2/promise');
-require('dotenv').config();
+require('dotenv').config({ override: true });
 
 // Creamos un "pool" de conexiones (es más eficiente y escalable)
 const pool = mysql.createPool({

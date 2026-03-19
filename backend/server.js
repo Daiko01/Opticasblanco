@@ -1,8 +1,9 @@
-// backend/server.js
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const compression = require('compression');
-require('dotenv').config();
+
+require('dotenv').config({ override: true });
 
 // Inicializamos la aplicación
 const app = express();
@@ -10,8 +11,21 @@ const app = express();
 // ── Middlewares de rendimiento y seguridad ──────────────────────────────────
 // compresión Gzip para todas las respuestas JSON (Web Quality)
 app.use(compression());
-app.use(cors());
+
+// Configuración de Seguridad con Helmet
+app.use(helmet());
+
+// Configuración Estricta de CORS
+const corsOptions = {
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+};
+app.use(cors(corsOptions));
+
 app.use(express.json());
+
 
 // Exponer la carpeta uploads para que las imágenes sean públicas
 const path = require('path');

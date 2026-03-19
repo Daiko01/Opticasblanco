@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { Calendar as CalendarIcon, Clock, MapPin, Navigation, User, Phone, Mail, CheckCircle, Check, ArrowLeft, ArrowRight } from 'lucide-react';
+import API_BASE_URL from '../config';
 
 export default function Agendamiento({ abierto, onCerrar }) {
   const [sucursales, setSucursales] = useState([]);
@@ -19,7 +20,7 @@ export default function Agendamiento({ abierto, onCerrar }) {
   };
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/sucursales')
+    fetch(`${API_BASE_URL}/sucursales`)
       .then(respuesta => respuesta.json())
       .then(datos => setSucursales(datos))
       .catch(error => console.error("Error al cargar sucursales:", error));
@@ -27,7 +28,7 @@ export default function Agendamiento({ abierto, onCerrar }) {
 
   useEffect(() => {
     if (datosFormulario.fecha && datosFormulario.sucursal_id) {
-      fetch(`http://localhost:5000/api/citas/ocupadas?fecha=${datosFormulario.fecha}&sucursal_id=${datosFormulario.sucursal_id}`)
+      fetch(`${API_BASE_URL}/citas/ocupadas?fecha=${datosFormulario.fecha}&sucursal_id=${datosFormulario.sucursal_id}`)
         .then(r => r.json())
         .then(data => {
           if (Array.isArray(data)) setHorasOcupadas(data);
@@ -177,7 +178,7 @@ export default function Agendamiento({ abierto, onCerrar }) {
     delete payload.hora;
 
     try {
-      const respuesta = await fetch('http://localhost:5000/api/citas', {
+      const respuesta = await fetch(`${API_BASE_URL}/citas`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

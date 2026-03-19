@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Glasses, Sparkles, Search, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import API_BASE_URL from '../config';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -16,7 +17,7 @@ export default function ProductosDestacadosHome() {
   const [canScrollRight, setCanScrollRight] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/productos')
+    fetch(`${API_BASE_URL}/productos`)
       .then(r => r.json())
       .then(d => { setProductos(d); setCargando(false); })
       .catch(() => setCargando(false));

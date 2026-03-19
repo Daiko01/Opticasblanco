@@ -33,7 +33,7 @@ export default function NuestrasMarcas() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {marcas.map((marca, idx) => (
             <Link key={idx} to={`/catalogo?marca=${encodeURIComponent(marca.nombre)}`}
-              className="organic-card p-8 flex flex-col items-center justify-center text-center group">
+              className="organic-card-v2 p-8 flex flex-col items-center justify-center text-center group">
               <div className="h-16 flex items-center justify-center mb-4">
                 <h3 className="text-xl md:text-2xl font-heading font-black tracking-tighter text-slate-400 group-hover:text-emerald-700 transition-all">{marca.logoText}</h3>
               </div>
@@ -50,7 +50,7 @@ export default function NuestrasMarcas() {
             </h2>
             <p className="text-emerald-200/50 mb-8 max-w-lg mx-auto font-light">Si no encuentras el armazón que buscas, contáctanos.</p>
             <button className="btn-magnetic btn-slide bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-3 rounded-4xl transition-all shadow-organic-md"
-              onClick={() => window.open('https://wa.me/56975879294?text=Hola,%20busco%20un%20modelo%20específico', '_blank')}>
+              onClick={() => window.open('https://wa.me/56991762935?text=Hola,%20busco%20un%20modelo%20específico', '_blank')}>
               <span className="relative z-10">Consultar Disponibilidad</span>
             </button>
           </div>
