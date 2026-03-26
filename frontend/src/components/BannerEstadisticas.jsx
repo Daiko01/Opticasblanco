@@ -22,7 +22,7 @@ export default function BannerEstadisticas() {
     { icon: Users, number: '5.000+', label: 'Clientes atendidos por año' },
     { icon: MapPin, number: '3', label: 'Sucursales en la V Región' },
     { icon: Glasses, number: '500+', label: 'Modelos con stock permanente' },
-    { icon: Clock, number: '15+', label: 'Años de experiencia' },
+    { icon: Clock, number: '20+', label: 'Años de experiencia' },
   ];
 
   return (

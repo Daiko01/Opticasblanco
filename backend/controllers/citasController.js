@@ -1,6 +1,5 @@
 const db = require('../config/db');
 const { enviarCorreoConfirmacion, enviarAlertaAdmin } = require('../config/mailer');
-const { crearEventoCalendario } = require('../services/calendarService');
 
 // Helper para sanitizar strings (evitar XSS básico)
 const sanitizar = (str) => {
@@ -83,36 +82,43 @@ const crearCita = async (req, res) => {
 
         const citaDatoCompleto = { ...req.body, motivo: motivoReal };
 
-        // Mapeo Dinámico de Calendarios por Sucursal
-        // Idealmente estos IDs deberían venir desde Variables de Entorno (.env)
-        const calendarMap = {
-            1: process.env.CALENDAR_QUILPUE || 'primary',
-            2: process.env.CALENDAR_VINA || 'primary',
-            3: process.env.CALENDAR_LACALERA || 'primary'
-        };
-        const calendarIdTarget = calendarMap[sucursal_id] || 'primary';
-
-        // --- ENVIAR NOTIFICACIONES Y CALENDAR ---
+        // --- ENVIAR NOTIFICACIONES ---
         // Se ejecutan en paralelo y se capturan los errores internamente
         // para no bloquear la respuesta rápida al Frontend.
-        
-        // Envolvemos el llamado a calendar para capturar y silenciar el error de archivo genérico
-        const llamarCalendarioSeguro = async () => {
+
+        // Enviar notificación a WhatsApp usando CallMeBot
+        const waCredentialsMap = {
+            1: { phone: process.env.WA_PHONE_VINA, key: process.env.WA_KEY_VINA },       // Viña es ID 1
+            2: { phone: process.env.WA_PHONE_QUILPUE, key: process.env.WA_KEY_QUILPUE }, // Quilpué es ID 2
+            3: { phone: process.env.WA_PHONE_LACALERA, key: process.env.WA_KEY_LACALERA }
+        };
+
+        const enviarWhatsAppCallMeBot = async () => {
+            const waTarget = waCredentialsMap[sucursal_id];
+            if (!waTarget || !waTarget.phone || !waTarget.key) {
+                console.log('Aviso: Credenciales de WhatsApp no configuradas para esta sucursal.');
+                return;
+            }
             try {
-                await crearEventoCalendario(citaDatoCompleto, calendarIdTarget);
-            } catch (err) {
-                if (err.message && (err.message.includes('ENOENT') || err.message.includes('credentials'))) {
-                    console.log('Aviso: Credenciales de Calendar pendientes');
+                const textoMensaje = `*Nueva Cita*\nNombre: ${cliente_nombre}\nFecha y Hora: ${fechaFormateada}\nTeléfono: ${telefono}`;
+                const encodedText = encodeURIComponent(textoMensaje);
+                const url = `https://api.callmebot.com/whatsapp.php?phone=${waTarget.phone}&text=${encodedText}&apikey=${waTarget.key}`;
+                
+                const response = await fetch(url);
+                if (response.ok) {
+                    console.log('Notificación de WhatsApp enviada exitosamente a la sucursal.');
                 } else {
-                    console.error('Error en Calendar:', err.message);
+                    console.error('Fallo al enviar WhatsApp a CallMeBot, status:', response.status);
                 }
+            } catch (err) {
+                console.error('Error enviando WhatsApp:', err.message);
             }
         };
 
         Promise.allSettled([
             enviarCorreoConfirmacion(email, cliente_nombre, fecha_hora, sucursal_id, motivoReal),
             enviarAlertaAdmin(req.body),
-            llamarCalendarioSeguro()
+            enviarWhatsAppCallMeBot()
         ]).then(results => {
             results.forEach((result, idx) => {
                 if (result.status === 'rejected') {

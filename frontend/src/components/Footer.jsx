@@ -15,7 +15,7 @@ export default function Footer() {
               Ópticas <span className="font-drama italic text-emerald-300">Blanco</span> <span className="text-[10px] bg-emerald-800/50 px-2 py-0.5 rounded-full font-data">v1.0</span>
             </h3>
             <p className="text-emerald-200/85 text-sm leading-relaxed md:pr-4 max-w-sm md:max-w-none">
-              Tu salud visual es nuestra pasión. Profesionales especializados, tecnología de punta y las mejores marcas internacionales.
+              Tu salud visual es nuestra prioridad. Profesionales especializados, tecnología de punta y las mejores marcas.
             </p>
             <div className="flex gap-3 justify-center md:justify-start">
               <a href="https://www.instagram.com/opticasblanco/" target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-2xl bg-white/5 flex items-center justify-center text-emerald-200/80 hover:bg-emerald-600 hover:text-white transition-all duration-300 link-lift border border-white/5 hover:border-emerald-600">

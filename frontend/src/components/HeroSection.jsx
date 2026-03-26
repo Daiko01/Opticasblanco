@@ -50,16 +50,16 @@ export default function HeroSection({ onAbrirReserva }) {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
           </span>
-          +15 años cuidando tu visión en la V Región
+          +20 años cuidando tu visión en la V Región
         </div>
 
         {/* Keyline Statement */}
         <h1 className="hero-anim mb-6">
           <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-white tracking-tight leading-[1.1]">
-            Tu salud visual es la
+            Tu salud visual es nuestra
           </span>
           <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-drama italic text-white leading-[0.95] -mt-1 md:-mt-2">
-            Precisión.
+            Prioridad.
           </span>
         </h1>
 
@@ -97,7 +97,7 @@ export default function HeroSection({ onAbrirReserva }) {
             <span className="text-sm text-white/70 font-data uppercase tracking-wider">Sucursales</span>
           </div>
           <div>
-            <span className="block text-3xl md:text-4xl font-drama italic text-emerald-300">15+</span>
+            <span className="block text-3xl md:text-4xl font-drama italic text-emerald-300">20+</span>
             <span className="text-sm text-white/70 font-data uppercase tracking-wider">Años</span>
           </div>
         </div>
