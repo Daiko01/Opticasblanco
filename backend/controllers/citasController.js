@@ -129,6 +129,12 @@ const crearCita = async (req, res) => {
 
         res.status(201).json({ mensaje: 'Cita agendada', id_cita: resultado.insertId });
     } catch (error) {
+        // Condición de carrera: el UNIQUE INDEX rechazó un INSERT duplicado
+        if (error.code === 'ER_DUP_ENTRY' || error.errno === 1062) {
+            return res.status(409).json({
+                mensaje: 'Lo sentimos, este bloque horario acaba de ser reservado por otra persona. Por favor, selecciona otro.'
+            });
+        }
         console.error("Error general en crearCita:", error);
         res.status(500).json({ mensaje: 'Error al guardar la reserva' });
     }

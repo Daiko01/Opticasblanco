@@ -207,6 +207,20 @@ body::before {
   100% { transform: translateY(0); }
 }
 
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.4; }
+  25% { transform: translateY(-20px) translateX(10px) scale(1.1); opacity: 0.6; }
+  50% { transform: translateY(-8px) translateX(-8px) scale(0.9); opacity: 0.3; }
+  75% { transform: translateY(-25px) translateX(5px) scale(1.05); opacity: 0.5; }
+}
+.animate-float-particle { animation: float-particle 8s ease-in-out infinite; }
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-bounce-slow { animation: bounce-slow 3s ease-in-out infinite; }
+
 /* ========================================
    SHIMMER / SKELETON
    ======================================== */
@@ -228,7 +242,7 @@ body::before {
   .animate-marquee, .animate-float, .animate-float-delayed,
   .animate-pulse-ring, .animate-slide-up, .animate-scale-in,
   .animate-fade-in, .animate-fade-in-up, .animate-modal-in,
-  .animate-spin-slow {
+  .animate-spin-slow, .animate-float-particle, .animate-bounce-slow {
     animation: none !important;
     transition: none !important;
   }

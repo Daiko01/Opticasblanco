@@ -18,6 +18,7 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import ProductoDetalle from './components/ProductoDetalle';
 import FloatingActions from './components/FloatingActions';
+import ErrorPage from './components/ErrorPage';
 
 import QuienesSomos from './components/QuienesSomos';
 import NuestrasTiendas from './components/NuestrasTiendas';
@@ -415,6 +416,23 @@ function App() {
         } />
 
         <Route path="/admin" element={<VistaAdmin modoOscuro={modoOscuro} setModoOscuro={setModoOscuro} />} />
+
+        {/* Error Pages */}
+        <Route path="/500" element={
+          <PageLayout modoOscuro={modoOscuro} setModoOscuro={setModoOscuro} onAbrirReserva={() => setModalReservaAbierto(true)}>
+            <ErrorPage tipo={500} />
+          </PageLayout>
+        } />
+        <Route path="/403" element={
+          <PageLayout modoOscuro={modoOscuro} setModoOscuro={setModoOscuro} onAbrirReserva={() => setModalReservaAbierto(true)}>
+            <ErrorPage tipo={403} />
+          </PageLayout>
+        } />
+        <Route path="*" element={
+          <PageLayout modoOscuro={modoOscuro} setModoOscuro={setModoOscuro} onAbrirReserva={() => setModalReservaAbierto(true)}>
+            <ErrorPage tipo={404} />
+          </PageLayout>
+        } />
       </Routes>
     </BrowserRouter>
   );
